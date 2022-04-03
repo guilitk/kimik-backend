@@ -29,7 +29,6 @@ const getUserByRefreshToken = async refreshToken => {
 
 const createUser = async ({ username, password, email, name }) => {
   const queryString = `INSERT INTO users (username,email,password,name) VALUES (?,?,?,?)`;
-
   await executeQuery(queryString, [
     username,
     email ?? null,

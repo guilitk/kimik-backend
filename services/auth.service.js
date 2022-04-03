@@ -1,10 +1,9 @@
 import {
   getUserByUsername,
-  createUser,
   setRefreshToken,
   getUserByRefreshToken,
 } from "../repositories/user.repository.js";
-import { hashPassword, verifyPassword } from "../utils/encryption.js";
+import { verifyPassword } from "../utils/encryption.js";
 import { getAuthenticationTokens } from "../utils/token.js";
 
 async function login({ username, password }) {
@@ -26,11 +25,6 @@ async function login({ username, password }) {
   await setRefreshToken(refreshToken, refreshTokenExpiration, user.username);
 
   return { accessToken, idToken, refreshToken };
-}
-
-async function register({ username, password, email, name }) {
-  const hashedPassword = await hashPassword(password);
-  await createUser({ username, password: hashedPassword, email, name });
 }
 
 async function refreshToken({ token }) {
@@ -56,6 +50,5 @@ async function refreshToken({ token }) {
 
 export const authService = {
   login,
-  register,
   refreshToken,
 };
