@@ -13,11 +13,17 @@ async function getConnection() {
 }
 
 async function executeQuery(queryString, values) {
-  const connection = await getConnection();
+  let connection;
 
-  return values
-    ? await connection.query(queryString, values)
-    : await connection.query(queryString);
+  try {
+    connection = await getConnection();
+
+    return values
+      ? await connection.query(queryString, values)
+      : await connection.query(queryString);
+  } finally {
+    connection && connection.destroy();
+  }
 }
 
 export { executeQuery };
