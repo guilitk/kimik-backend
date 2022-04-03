@@ -12,6 +12,12 @@ app.use("/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/calculation", calculationRouter);
 
-app.listen(8080, () => {
+app.get("/", (req, res, next) => {
+  res.send("API funcional!");
+});
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
   console.log("Servidor rodando");
 });
