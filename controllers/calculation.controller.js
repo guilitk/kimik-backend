@@ -18,7 +18,8 @@ class CalculationController {
       });
       res.status(200).json({ calculations });
     } catch (error) {
-      res.status(500).json({ error: "SERVER_ERROR" });
+      console.log(error);
+      res.status(500).json({ error: error });
     }
   }
 }
